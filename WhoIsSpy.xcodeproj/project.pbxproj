@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		049251652579399B00F966F5 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049251642579399B00F966F5 /* QuestionViewController.swift */; };
+		04925168257939C300F966F5 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04925167257939C300F966F5 /* VoteViewController.swift */; };
+		0492516B25793A2800F966F5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492516A25793A2800F966F5 /* Player.swift */; };
+		049251ED257CF57A00F966F5 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049251EC257CF57A00F966F5 /* RuleViewController.swift */; };
+		049251F12580838900F966F5 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 049251F02580838800F966F5 /* music.mp3 */; };
 		04FC0F8325769AE000442A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC0F8225769AE000442A63 /* AppDelegate.swift */; };
 		04FC0F8525769AE000442A63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC0F8425769AE000442A63 /* SceneDelegate.swift */; };
 		04FC0F8725769AE000442A63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC0F8625769AE000442A63 /* ViewController.swift */; };
@@ -16,6 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		049251642579399B00F966F5 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		04925167257939C300F966F5 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		0492516A25793A2800F966F5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		049251EC257CF57A00F966F5 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
+		049251F02580838800F966F5 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		04FC0F7F25769AE000442A63 /* WhoIsSpy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhoIsSpy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FC0F8225769AE000442A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04FC0F8425769AE000442A63 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,13 +66,18 @@
 		04FC0F8125769AE000442A63 /* WhoIsSpy */ = {
 			isa = PBXGroup;
 			children = (
+				049251F02580838800F966F5 /* music.mp3 */,
 				04FC0F8225769AE000442A63 /* AppDelegate.swift */,
 				04FC0F8425769AE000442A63 /* SceneDelegate.swift */,
 				04FC0F8625769AE000442A63 /* ViewController.swift */,
 				04FC0F8825769AE000442A63 /* Main.storyboard */,
+				049251EC257CF57A00F966F5 /* RuleViewController.swift */,
 				04FC0F8B25769AE400442A63 /* Assets.xcassets */,
 				04FC0F8D25769AE400442A63 /* LaunchScreen.storyboard */,
 				04FC0F9025769AE400442A63 /* Info.plist */,
+				049251642579399B00F966F5 /* QuestionViewController.swift */,
+				04925167257939C300F966F5 /* VoteViewController.swift */,
+				0492516A25793A2800F966F5 /* Player.swift */,
 			);
 			path = WhoIsSpy;
 			sourceTree = "<group>";
@@ -126,6 +141,7 @@
 			files = (
 				04FC0F8F25769AE400442A63 /* LaunchScreen.storyboard in Resources */,
 				04FC0F8C25769AE400442A63 /* Assets.xcassets in Resources */,
+				049251F12580838900F966F5 /* music.mp3 in Resources */,
 				04FC0F8A25769AE000442A63 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +155,10 @@
 			files = (
 				04FC0F8725769AE000442A63 /* ViewController.swift in Sources */,
 				04FC0F8325769AE000442A63 /* AppDelegate.swift in Sources */,
+				04925168257939C300F966F5 /* VoteViewController.swift in Sources */,
+				049251652579399B00F966F5 /* QuestionViewController.swift in Sources */,
+				049251ED257CF57A00F966F5 /* RuleViewController.swift in Sources */,
+				0492516B25793A2800F966F5 /* Player.swift in Sources */,
 				04FC0F8525769AE000442A63 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +307,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2PE9PJ5FZ5;
 				INFOPLIST_FILE = WhoIsSpy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,6 +326,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2PE9PJ5FZ5;
 				INFOPLIST_FILE = WhoIsSpy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
