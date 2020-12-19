@@ -19,13 +19,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // 建立pickerView物件, 人數資料陣列
     var playerPicker = UIPickerView()
     var spyPicker = UIPickerView()
+    var playerName = [String]()
     let playerNumberForSelect = [4, 5, 6, 7, 8, 9, 10]
     let spyNumberForSelect = [1, 2, 3]
+    
     
     // 預設人數
     var playerNumber = 4
     var spyNumber = 1
     var blankNumber = 0
+    
+    var question = [IdentityQuestion]()
+    var loadingActivityIndicator: UIActivityIndicatorView!
+    let id = "1xFqqMnqUFRNTnj_su5cW0hCgnj7Fw-kCaIJOO-NEApM"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +41,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 //        player.replaceCurrentItem(with: playerItem)
 //        player.play()
         
+        // 設定採用淺色模式
+        overrideUserInterfaceStyle = .light
         // 設定delegate, dataSource來源
         playerPicker.dataSource = self
         playerPicker.delegate = self
@@ -52,6 +60,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         // 將switch預設關閉
         setBlankSwitch.isOn = false
+        
+        // 設定loadingActivityIndicatorView
+        loadingActivityIndicator = UIActivityIndicatorView(style: .medium)
+        loadingActivityIndicator.center = view.center
+        view.addSubview(loadingActivityIndicator)
+        
+        // fetchQuestion
+        let urlStr = "https://spreadsheets.google.com/feeds/list/\(id)/od6/public/values?alt=json"
+        fetchQuestion(urlStr: urlStr) {(identityQuestion) in
+            if let identityQuestion = identityQuestion {
+                self.question = identityQuestion
+                DispatchQueue.main.async {
+                    self.loadingActivityIndicator.stopAnimating()
+                    self.view.isUserInteractionEnabled = true
+                }
+            }
+        }
         
     }
     
@@ -129,18 +154,56 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     
-    @IBAction func customQuestion(_ sender: Any) {
-        let controller = UIAlertController(title: "", message: "尚未開放此功能,敬請期待", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+    @IBAction func customPlayerName(_ sender: Any) {
+        let controller = UIAlertController(title: "自訂暱稱", message: "", preferredStyle: .alert)
+        
+        for _ in 1...playerNumber {
+            controller.addTextField { (textField) in
+                textField.placeholder = "請輸入暱稱"
+                textField.keyboardType = .namePhonePad
+            }
+        }
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            
+            for index in 0...self.playerNumber-1 {
+                guard let name = controller.textFields?[index].text else { return }
+                self.playerName.append(name)
+            }
+            print(self.playerName)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         controller.addAction(okAction)
+        controller.addAction(cancelAction)
+        
         present(controller, animated: true, completion: nil)
     }
     
     @IBSegueAction func showQuestion(_ coder: NSCoder) -> QuestionViewController? {
         // 程式只有一行時可省略return
-        QuestionViewController(coder: coder, playerNumber: playerNumber, spyNumber: spyNumber, blankNumber: blankNumber)
+        QuestionViewController(coder: coder, playerNumber: playerNumber, spyNumber: spyNumber, blankNumber: blankNumber, playerName: playerName, question: question)
     }
-    
+        
+    func fetchQuestion(urlStr: String, completionHandler: @escaping ([IdentityQuestion]?) -> Void) {
+        if let url = URL(string: urlStr) {
+            // 啟動loadingAnimating
+            loadingActivityIndicator.startAnimating()
+            view.isUserInteractionEnabled = false
+            // Data Download
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    do {
+                        let question = try decoder.decode(SearchResponse.self, from: data)
+                        completionHandler(question.feed.entry)
+                    } catch {
+                        completionHandler([])
+                    }
+                }
+            }.resume()
+        }
+    }
     
 }
 

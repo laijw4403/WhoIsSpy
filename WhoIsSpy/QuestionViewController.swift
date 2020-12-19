@@ -9,41 +9,8 @@ import UIKit
 
 class QuestionViewController: UIViewController {
     
-    var question = [Question(civilianQuestion: "KKBOX", spyQuestion: "Spotify", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "Apple", spyQuestion: "SAMSUNG", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "GAI", spyQuestion: "吳亦凡", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "周杰倫", spyQuestion: "費玉清", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "太監", spyQuestion: "人妖", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "牛奶", spyQuestion: "豆漿", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "新年", spyQuestion: "跨年", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "淘寶", spyQuestion: "蝦皮", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "雙胞胎", spyQuestion: "龍鳳胎", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "川普", spyQuestion: "習近平", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "鈔票", spyQuestion: "銅板", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "包青天", spyQuestion: "狄仁杰", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "蜜蜂", spyQuestion: "蝴蝶", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "颱風", spyQuestion: "龍捲風", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "橘子", spyQuestion: "柳丁", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "IG", spyQuestion: "FB", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "手扶梯", spyQuestion: "電梯", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "伏特加", spyQuestion: "高粱酒", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "原住民", spyQuestion: "新住民", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "正宮", spyQuestion: "小三", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "工具人", spyQuestion: "跑腿小弟", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "楓康", spyQuestion: "全聯", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "麥當勞", spyQuestion: "肯德基", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "三媽臭臭鍋", spyQuestion: "大呼過癮", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "多拉Ａ夢", spyQuestion: "蠟筆小新", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "狼人殺", spyQuestion: "阿瓦隆", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "愛奇藝", spyQuestion: "Netflix", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "山貓", spyQuestion: "石虎", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "重機", spyQuestion: "檔車", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "西瓜刀", spyQuestion: "開山刀", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "一卡通", spyQuestion: "悠遊卡", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "7-11", spyQuestion: "全家", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "統一獅", spyQuestion: "兄弟象", blankQuestion:"你是白板"),
-                    Question(civilianQuestion: "好樂迪", spyQuestion: "錢櫃", blankQuestion:"你是白板"),]
-    var name = [String]()
+    var question = [IdentityQuestion]()
+    var playerName: [String]!
     var player = [Player]()
     var identity = [Identity]()
     var playerNumber: Int!
@@ -56,10 +23,12 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var showQuestionButton: UIButton!
     
     // 透過程式跑到此畫面初始時傳值
-    init?(coder: NSCoder, playerNumber: Int, spyNumber: Int, blankNumber: Int) {
+    init?(coder: NSCoder, playerNumber: Int, spyNumber: Int, blankNumber: Int, playerName: [String], question: [IdentityQuestion]) {
         self.playerNumber = playerNumber
         self.spyNumber = spyNumber
         self.blankNumber = blankNumber
+        self.playerName = playerName
+        self.question = question
         super.init(coder: coder)
     }
     
@@ -70,9 +39,10 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createPlayer(number: playerNumber)
+        nameLabel.text = player[0].name
         questionLabel.isHidden = true
         print("playNumber:\(String(describing: playerNumber)), spyNumber:\(String(describing: spyNumber)), blankNumber:\(String(describing: blankNumber))")
-        createPlayer(number: playerNumber)
     }
     
     @IBAction func showQuestion(_ sender: UIButton) {
@@ -113,14 +83,21 @@ class QuestionViewController: UIViewController {
         print(question)
         
         for i in 0...(playerNumber-1) {
-                name.append("玩家\(i+1)")
-                print(name)
+        
+            // 玩家無自訂暱稱
+            if playerName.isEmpty {
+                for index in 0...playerNumber-1 {
+                    playerName.append("玩家\(index+1)")
+                    print(playerName)
+                }
+            }
+            
             if identity[i].rawValue == Identity.平民.rawValue {
-                    player.append(Player(name: name[i], identity: identity[i].rawValue, question: question[0].civilianQuestion))
+                    player.append(Player(name: playerName[i], identity: identity[i].rawValue, question: question[0].civilianQuestion.question))
             } else if identity[i].rawValue == Identity.白板.rawValue {
-                    player.append(Player(name: name[i], identity: identity[i].rawValue, question: question[0].blankQuestion))
+                    player.append(Player(name: playerName[i], identity: identity[i].rawValue, question: "你是白板"))
             } else {
-                    player.append(Player(name: name[i], identity: identity[i].rawValue, question: question[0].spyQuestion))
+                player.append(Player(name: playerName[i], identity: identity[i].rawValue, question: question[0].spyQuestion.question))
             }
         }
         print(player)
@@ -144,6 +121,25 @@ class QuestionViewController: UIViewController {
         
         print(identity)
     }
+    
+//    func fetchQuestion(urlStr: String, completionHandler: @escaping ([IdentityQuestion]?) -> Void) {
+//
+//        if let url = URL(string: urlStr) {
+//            print("Fetching")
+//            URLSession.shared.dataTask(with: url) { (data, response, error) in
+//                if let data = data {
+//                    let decoder = JSONDecoder()
+//                    do {
+//                        let question = try decoder.decode(SearchResponse.self, from: data)
+//                        completionHandler(question.feed.entry)
+//                    } catch {
+//                        completionHandler([])
+//                    }
+//                }
+//            }.resume()
+//            print("Fetch Done!")
+//        }
+//    }
     
 
     /*

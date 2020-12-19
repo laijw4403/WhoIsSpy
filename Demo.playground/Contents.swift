@@ -1,53 +1,51 @@
 import UIKit
 
-
-var name = [String]()
-
-name.append("玩家1")
-name
-print(name)
-struct Player {
-    let name: String
-    let identity: String
-    let question: String
-}
-
-enum Identity: String {
-    case civilian, spy
-}
-
-struct Question {
-    let civilianQuestion: String
-    let spyQuestion: String
-}
-
-let civilianQuestion = ["中華電信", "西瓜"]
-let spyQuestion = ["遠傳電信", "香瓜"]
-//let name = ["Player1", "Player2", "Player3"]
-var identity: [Identity]
-identity = [.civilian, .civilian, .spy]
-
-var question = [Question]()
-var players = [Player]()
-
-
-var count = civilianQuestion.count-1
-
-for i in 0...count {
-    question.append(Question(civilianQuestion: civilianQuestion[i], spyQuestion: spyQuestion[i]))
-}
-
-question.shuffle()
-identity.shuffle()
-
-for i in 0...(name.count-1) {
-    if identity[i].rawValue == Identity.civilian.rawValue {
-        players.append(Player(name: name[i], identity: identity[i].rawValue, question: question[0].civilianQuestion))
-    } else {
-        players.append(Player(name: name[i], identity: identity[i].rawValue, question: question[0].spyQuestion))
+struct SearchResponse: Codable {
+    let feed: QuestionData
+    
+    struct QuestionData: Codable {
+        let entry: [IdentityQuestion]
     }
-    print(players[i])
 }
+
+struct IdentityQuestion: Codable {
+    let civilianQuestion: Question
+    let spyQuestion: Question
+    
+    enum CodingKeys: String, CodingKey {
+        case civilianQuestion = "gsx$civilianquestion"
+        case spyQuestion = "gsx$spyquestion"
+    }
+}
+
+struct Question: Codable {
+    let question: String
+    
+    enum CodingKeys: String, CodingKey {
+        case question = "$t"
+    }
+}
+var question = [IdentityQuestion]()
+let id = "1xFqqMnqUFRNTnj_su5cW0hCgnj7Fw-kCaIJOO-NEApM"
+let urlStr = "https://spreadsheets.google.com/feeds/list/\(id)/od6/public/values?alt=json"
+
+func fetchQuestion(urlStr: String) {
+    if let url = URL(string: urlStr) {
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let question = try decoder.decode(SearchResponse.self, from: data)
+                    print(question.feed.entry[0].civilianQuestion.question)
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
+    }
+}
+
+fetchQuestion(urlStr: urlStr)
 
 
 

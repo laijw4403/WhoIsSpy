@@ -38,7 +38,6 @@ class VoteViewController: UIViewController {
         
         initButton()
         initIdentityLabel()
-        
     }
     
     @IBAction func votePlayer(_ sender: UIButton) {
@@ -69,6 +68,11 @@ class VoteViewController: UIViewController {
     }
     
     func initButton() {
+        // 初始玩家暱稱
+        for i in 0...playerNumber-1 {
+            playerVoteButton[i].setTitle(player[i].name, for: .normal)
+        }
+        // 初始按鈕數量
         var index = playerVoteButton.count
         print(index)
         while index > player.count {
@@ -106,7 +110,11 @@ class VoteViewController: UIViewController {
         identityLabel[index].text = identity
         identityLabel[index].isHidden = false
         
-        if spyNumber == civilianNumber + blankNumber{
+        // 遊戲結束條件
+        if spyNumber == 0 && blankNumber == 1 {
+            resultLabel.text = "遊戲結束！白板獲勝"
+            resultLabel.textColor = .black
+        } else if spyNumber + civilianNumber + blankNumber == 3 && spyNumber >= 1 {
             resultLabel.text = "遊戲結束！臥底獲勝"
             resultLabel.textColor = UIColor(cgColor: CGColor(srgbRed: 176/255, green: 62/255, blue: 44/255, alpha: 1))
         } else if spyNumber == 0 {
@@ -127,7 +135,10 @@ class VoteViewController: UIViewController {
         
         //if player
     }
-    
+
+    @IBSegueAction func showForgetQuestionView(_ coder: NSCoder) -> ForgetQuestionViewController? {
+        return ForgetQuestionViewController(corder: coder, player: player, playerNumber: playerNumber)
+    }
     /*
     // MARK: - Navigation
 

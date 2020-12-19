@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043042C4258CCE92008B122E /* ForgetQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043042C3258CCE92008B122E /* ForgetQuestionViewController.swift */; };
+		043042C7258DB48A008B122E /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043042C6258DB489008B122E /* LoadingViewController.swift */; };
 		049251652579399B00F966F5 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049251642579399B00F966F5 /* QuestionViewController.swift */; };
 		04925168257939C300F966F5 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04925167257939C300F966F5 /* VoteViewController.swift */; };
 		0492516B25793A2800F966F5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492516A25793A2800F966F5 /* Player.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		043042C3258CCE92008B122E /* ForgetQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetQuestionViewController.swift; sourceTree = "<group>"; };
+		043042C6258DB489008B122E /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		049251642579399B00F966F5 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		04925167257939C300F966F5 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
 		0492516A25793A2800F966F5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 				049251642579399B00F966F5 /* QuestionViewController.swift */,
 				04925167257939C300F966F5 /* VoteViewController.swift */,
 				0492516A25793A2800F966F5 /* Player.swift */,
+				043042C3258CCE92008B122E /* ForgetQuestionViewController.swift */,
+				043042C6258DB489008B122E /* LoadingViewController.swift */,
 			);
 			path = WhoIsSpy;
 			sourceTree = "<group>";
@@ -158,8 +164,10 @@
 				04925168257939C300F966F5 /* VoteViewController.swift in Sources */,
 				049251652579399B00F966F5 /* QuestionViewController.swift in Sources */,
 				049251ED257CF57A00F966F5 /* RuleViewController.swift in Sources */,
+				043042C7258DB48A008B122E /* LoadingViewController.swift in Sources */,
 				0492516B25793A2800F966F5 /* Player.swift in Sources */,
 				04FC0F8525769AE000442A63 /* SceneDelegate.swift in Sources */,
+				043042C4258CCE92008B122E /* ForgetQuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
