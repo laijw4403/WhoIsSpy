@@ -19,7 +19,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // 建立pickerView物件, 人數資料陣列
     var playerPicker = UIPickerView()
     var spyPicker = UIPickerView()
-    var playerName = [String]()
+    var playerName = ["","","","","","","","","",""]
     let playerNumberForSelect = [4, 5, 6, 7, 8, 9, 10]
     let spyNumberForSelect = [1, 2, 3]
     
@@ -156,7 +156,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func customPlayerName(_ sender: Any) {
         let controller = UIAlertController(title: "自訂暱稱", message: "", preferredStyle: .alert)
-        
+        print(playerName)
         for _ in 1...playerNumber {
             controller.addTextField { (textField) in
                 textField.placeholder = "請輸入暱稱"
@@ -168,7 +168,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             for index in 0...self.playerNumber-1 {
                 guard let name = controller.textFields?[index].text else { return }
-                self.playerName.append(name)
+                self.playerName[index] = name
             }
             print(self.playerName)
         }
@@ -198,11 +198,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                         let question = try decoder.decode(SearchResponse.self, from: data)
                         completionHandler(question.feed.entry)
                     } catch {
-                        completionHandler([])
+                        completionHandler(nil)
                     }
                 }
             }.resume()
         }
+    }
+    
+    @IBAction func unwindToHomePage(_ unwindSegue: UIStoryboardSegue) {
+        //let sourceViewController = unwindSegue.source
     }
     
 }

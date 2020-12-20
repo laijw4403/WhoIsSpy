@@ -65,6 +65,7 @@ class QuestionViewController: UIViewController {
             ruleViewController.playerNumber = playerNumber
             ruleViewController.spyNumber = spyNumber
             ruleViewController.blankNumber = blankNumber
+            ruleViewController.playerName = playerName
             present(ruleViewController, animated: true, completion: nil)
         } else {
                 nameLabel.text = player[playerIndex].name
@@ -120,6 +121,11 @@ class QuestionViewController: UIViewController {
         }
         
         print(identity)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as? ViewController
+        controller?.playerName = playerName
     }
     
 //    func fetchQuestion(urlStr: String, completionHandler: @escaping ([IdentityQuestion]?) -> Void) {

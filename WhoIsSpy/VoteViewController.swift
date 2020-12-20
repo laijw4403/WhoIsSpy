@@ -9,6 +9,7 @@ import UIKit
 
 class VoteViewController: UIViewController {
     
+    var playerName = [String]()
     var player = [Player]()
     var playerNumber: Int!
     var spyNumber: Int!
@@ -20,12 +21,13 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var resultLabel: UILabel!
     
     
-    init?(coder: NSCoder, player: [Player], playerNumber: Int, spyNumber: Int, blankNumber: Int, civilianNumber: Int) {
+    init?(coder: NSCoder, player: [Player], playerNumber: Int, spyNumber: Int, blankNumber: Int, civilianNumber: Int, playerName: [String]) {
         self.player = player
         self.blankNumber = blankNumber
         self.playerNumber = playerNumber
         self.spyNumber = spyNumber
         self.civilianNumber = civilianNumber
+        self.playerName = playerName
         super.init(coder: coder)
     }
     
@@ -139,6 +141,12 @@ class VoteViewController: UIViewController {
     @IBSegueAction func showForgetQuestionView(_ coder: NSCoder) -> ForgetQuestionViewController? {
         return ForgetQuestionViewController(corder: coder, player: player, playerNumber: playerNumber)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as? ViewController
+        controller?.playerName = playerName
+    }
+    
     /*
     // MARK: - Navigation
 

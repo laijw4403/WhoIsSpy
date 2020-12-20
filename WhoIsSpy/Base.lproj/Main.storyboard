@@ -240,7 +240,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="showQuestion:" destination="IFK-rj-wNe" eventType="touchUpInside" id="JOb-QS-Inh"/>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="LUr-Kk-S4P"/>
+                                    <segue destination="m8J-bi-rhQ" kind="unwind" unwindAction="unwindToHomePage:" id="bKm-QO-Oa9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -266,6 +266,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqX-VP-g2a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="m8J-bi-rhQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1769.5652173913045" y="76.630434782608702"/>
         </scene>
@@ -729,7 +730,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="showQuestion:" destination="IFK-rj-wNe" eventType="touchUpInside" id="iNe-OT-IYE"/>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="IsN-9q-T2a"/>
+                                    <segue destination="7Is-lI-Rdq" kind="unwind" unwindAction="unwindToHomePage:" id="pPL-gF-0Xi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwc-c8-X8t">
@@ -792,6 +793,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OD7-5Q-G6b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="7Is-lI-Rdq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3234.7826086956525" y="76.630434782608702"/>
         </scene>
@@ -1118,7 +1120,4 @@
             <point key="canvasLocation" x="3235" y="791"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="LUr-Kk-S4P"/>
-    </inferredMetricsTieBreakers>
 </document>

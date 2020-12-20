@@ -10,6 +10,7 @@ import UIKit
 class RuleViewController: UIViewController {
     
     var player = [Player]()
+    var playerName = [String]()
     var playerNumber: Int!
     var spyNumber: Int!
     var blankNumber: Int!
@@ -22,7 +23,7 @@ class RuleViewController: UIViewController {
     
     @IBSegueAction func showVoteView(_ coder: NSCoder) -> VoteViewController? {
         let civilianNumber = playerNumber - spyNumber - blankNumber
-        return VoteViewController(coder: coder, player: player, playerNumber: playerNumber, spyNumber: spyNumber, blankNumber: blankNumber, civilianNumber: civilianNumber)
+        return VoteViewController(coder: coder, player: player, playerNumber: playerNumber, spyNumber: spyNumber, blankNumber: blankNumber, civilianNumber: civilianNumber, playerName: playerName)
     }
     
     /*
