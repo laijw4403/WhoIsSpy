@@ -13,6 +13,7 @@ class QuestionViewController: UIViewController {
     var playerName: [String]!
     var player = [Player]()
     var identity = [Identity]()
+    var playerNameIsEmpty: Bool!
     var playerNumber: Int!
     var spyNumber: Int!
     var blankNumber: Int!
@@ -23,12 +24,14 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var showQuestionButton: UIButton!
     
     // 透過程式跑到此畫面初始時傳值
-    init?(coder: NSCoder, playerNumber: Int, spyNumber: Int, blankNumber: Int, playerName: [String], question: [IdentityQuestion]) {
+    init?(coder: NSCoder, playerNumber: Int, spyNumber: Int, blankNumber: Int, playerName: [String], question: [IdentityQuestion], playerNameIsEmpty: Bool) {
         self.playerNumber = playerNumber
         self.spyNumber = spyNumber
         self.blankNumber = blankNumber
         self.playerName = playerName
         self.question = question
+        self.playerNameIsEmpty = playerNameIsEmpty
+        // 可能為nil, 因此需init?
         super.init(coder: coder)
     }
     
@@ -84,11 +87,11 @@ class QuestionViewController: UIViewController {
         print(question)
         
         for i in 0...(playerNumber-1) {
-        
             // 玩家無自訂暱稱
-            if playerName.isEmpty {
+            if playerNameIsEmpty {
+                print("玩家無自訂暱稱")
                 for index in 0...playerNumber-1 {
-                    playerName.append("玩家\(index+1)")
+                    playerName[index] = ("玩家\(index+1)")
                     print(playerName)
                 }
             }

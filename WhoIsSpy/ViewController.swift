@@ -20,6 +20,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var playerPicker = UIPickerView()
     var spyPicker = UIPickerView()
     var playerName = ["","","","","","","","","",""]
+    var playerNameIsEmpty = true
     let playerNumberForSelect = [4, 5, 6, 7, 8, 9, 10]
     let spyNumberForSelect = [1, 2, 3]
     
@@ -171,6 +172,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 self.playerName[index] = name
             }
             print(self.playerName)
+            self.playerNameIsEmpty = false
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -182,7 +184,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBSegueAction func showQuestion(_ coder: NSCoder) -> QuestionViewController? {
         // 程式只有一行時可省略return
-        QuestionViewController(coder: coder, playerNumber: playerNumber, spyNumber: spyNumber, blankNumber: blankNumber, playerName: playerName, question: question)
+        QuestionViewController(coder: coder, playerNumber: playerNumber, spyNumber: spyNumber, blankNumber: blankNumber, playerName: playerName, question: question, playerNameIsEmpty: playerNameIsEmpty)
     }
         
     func fetchQuestion(urlStr: String, completionHandler: @escaping ([IdentityQuestion]?) -> Void) {
